@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  role     Role   @default(USER) // <-- changed to enum Role
+}
+
+model TrendingGame {
+  id        Int      @id @default(autoincrement())
+  title     String
+  category  String
+  price     Float
+  discount  Float?
+  imageUrl  String
+  createdAt DateTime @default(now())
+}
+
+model Game {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  discount    Float?
+  category    String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  USER
+}
