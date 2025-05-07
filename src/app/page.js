@@ -52,7 +52,7 @@ export default async function Home() {
           <div className="caption header-text">
             <h6>Welcome to lugx</h6>
             <h2>BEST E-SHOP WEBSITE</h2>
-            <p>LUGX Gaming is a gaming website. Tou can find many of your games on this site</p>
+            <p>LUGX Gaming is a gaming website. You can find many of your games on this site</p>
             <div className="search-input">
               <form id="search" action="#">
                 <input
@@ -84,7 +84,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-01.png" alt="" style={{ maxWidth: '44px' }}/>
+                <img src="/assets/images/featured-01.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
               </div>
               <h4>Free Storage</h4>
             </div>
@@ -94,7 +94,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-02.png" alt="" style={{ maxWidth: '44px' }}/>
+                <img src="/assets/images/featured-02.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
               </div>
               <h4>User More</h4>
             </div>
@@ -104,7 +104,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-03.png" alt="" style={{ maxWidth: '44px' }}/>
+                <img src="/assets/images/featured-03.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
               </div>
               <h4>Reply Ready</h4>
             </div>
@@ -114,7 +114,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-04.png" alt="" style={{ maxWidth: '44px' }}/>
+                <img src="/assets/images/featured-04.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
               </div>
               <h4>Easy Layout</h4>
             </div>
@@ -360,7 +360,6 @@ export default async function Home() {
                   <h6>Our Shop</h6>
                   <h2>Go Pre-Order Buy & Get Best <em>Prices</em> For You!</h2>
                 </div>
-                <p>Lorem ipsum dolor consectetur adipiscing, sed do eiusmod tempor incididunt.</p>
                 <div className="main-button">
                   <Link href="/shop">Shop Now</Link>
                 </div>

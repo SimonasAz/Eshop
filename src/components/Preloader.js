@@ -6,7 +6,6 @@ export default function Preloader() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    // as soon as we’re on the client, hide it
     setHidden(true);
   }, []);
 

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
+import { faker } from '@faker-js/faker'
 
 const prisma = new PrismaClient()
 
@@ -28,16 +29,25 @@ async function main() {
   console.log('✅ Seeded trending games')
 
   // 3) Seed shop games
-  const shopGames = [
-    { title: 'The Witcher 3: Wild Hunt', description: 'An epic RPG adventure…', price: 29.99, discount: 0.25, category: 'RPG',     imageUrl: '/assets/images/top-game-01.jpg' },
-    { title: 'Forza Horizon 5',          description: 'Open-world racing…',    price: 59.99, discount: 0.2,  category: 'Racing',  imageUrl: '/assets/images/top-game-02.jpg' },
-    { title: 'Minecraft',                 description: 'Create, explore…',      price: 26.95, discount: 0,    category: 'Adventure', imageUrl: '/assets/images/top-game-03.jpg' },
-    { title: 'Valorant',                  description: 'Tactical shooter…',     price: 0.0,   discount: 0,    category: 'Shooter',  imageUrl: '/assets/images/top-game-04.jpg' },
-    { title: 'Grand Theft Auto V',        description: 'Open-world epic…',       price: 19.99, discount: 0.5,  category: 'Action',   imageUrl: '/assets/images/top-game-05.jpg' },
-    { title: 'League of Legends',         description: 'Popular MOBA…',          price: 0.0,   discount: 0,    category: 'Strategy', imageUrl: '/assets/images/top-game-06.jpg' },
-  ]
-  await prisma.game.createMany({ data: shopGames })
-  console.log('✅ Seeded shop games')
+  const categories = ['Action','Adventure','RPG','Shooter','Strategy','Simulation','Sports','Racing']
+  const fakeGames = Array.from({ length: 100 }).map(() => {
+    const price    = parseFloat(faker.commerce.price(5, 100, 2))
+    // 30% chance of a discount
+    const discount = Math.random() < 0.3
+      ? parseFloat((Math.random() * 0.5).toFixed(2))
+      : 0
+    return {
+      title:       faker.commerce.productName(),
+      description: faker.lorem.sentences(2),
+      category:    faker.helpers.arrayElement(categories),
+      price,
+      discount,
+      imageUrl:    faker.image.url(640, 480, { category: 'games' }), 
+    }
+  })
+
+  await prisma.game.createMany({ data: fakeGames })
+  console.log(`✅ Seeded ${fakeGames.length} shop games`)
 }
 
 main()
