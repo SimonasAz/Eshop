@@ -7,11 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Review {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+  
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  
+  gameId    Int
+  game      Game     @relation(fields: [gameId], references: [id])
+}
+
 model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  role     Role   @default(USER) // <-- changed to enum Role
+  role     Role   @default(USER) 
+  reviews  Review[]
 }
 
 model TrendingGame {
@@ -33,6 +46,8 @@ model Game {
   category    String
   imageUrl    String
   createdAt   DateTime @default(now())
+  
+  reviews Review[]
 }
 
 enum Role {

@@ -48,6 +48,22 @@ async function main() {
 
   await prisma.game.createMany({ data: fakeGames })
   console.log(`✅ Seeded ${fakeGames.length} shop games`)
+
+  // 4) Seed regular users
+const userCount = 5
+const users = []
+for (let i = 0; i < userCount; i++) {
+  const password = await bcrypt.hash('user123', 10)
+  const user = await prisma.user.create({
+    data: {
+      email: `user${i + 1}@example.com`,
+      password,
+      role: 'USER',
+    },
+  })
+  users.push(user)
+}
+console.log(`✅ Created ${userCount} regular users`)
 }
 
 main()
