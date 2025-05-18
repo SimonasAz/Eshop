@@ -53,3 +53,26 @@ body {
   max-width: 60px;     /* adjust as needed */
   max-height: 60px;
 }
+
+.game-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.game-title {
+  font-size: 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.game-icon {
+  font-size: 18px;
+  color: #ff556e;
+  flex-shrink: 0;
+  margin-top: -500px;
+}

@@ -29,6 +29,9 @@ model User {
 
 model TrendingGame {
   id        Int      @id @default(autoincrement())
+  gameId    Int
+  game      Game     @relation(fields: [gameId], references: [id])
+
   title     String
   category  String
   price     Float
@@ -48,6 +51,7 @@ model Game {
   createdAt   DateTime @default(now())
   
   reviews Review[]
+  trendingGames TrendingGame[]
 }
 
 enum Role {

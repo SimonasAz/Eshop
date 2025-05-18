@@ -19,20 +19,43 @@ async function main() {
   console.log('✅ Admin user created')
 
   // 2) Seed trending games
-  const trendingGames = [
-    { title: "Assassin's Creed Mirage", category: 'Action', price: 49.99, discount: 0.2, imageUrl: '/assets/images/trending-01.jpg' },
-    { title: 'Final Fantasy XVI',       category: 'RPG',    price: 59.99, discount: 0.15, imageUrl: '/assets/images/trending-02.jpg' },
-    { title: 'Cyberpunk 2077',          category: 'Adventure', price: 39.99, discount: 0.3, imageUrl: '/assets/images/trending-03.jpg' },
-    { title: 'Elden Ring',              category: 'Action', price: 69.99, discount: 0.1, imageUrl: '/assets/images/trending-04.jpg' },
-  ]
-  await prisma.trendingGame.createMany({ data: trendingGames })
-  console.log('✅ Seeded trending games')
+  const trendingTitles = [
+  { title: "Assassin's Creed Mirage", category: 'Action', price: 49.99, discount: 0.2, imageUrl: '/assets/images/trending-01.jpg' },
+  { title: 'Final Fantasy XVI',       category: 'RPG',    price: 59.99, discount: 0.15, imageUrl: '/assets/images/trending-02.jpg' },
+  { title: 'Cyberpunk 2077',          category: 'Adventure', price: 39.99, discount: 0.3, imageUrl: '/assets/images/trending-03.jpg' },
+  { title: 'Elden Ring',              category: 'Action', price: 69.99, discount: 0.1, imageUrl: '/assets/images/trending-04.jpg' },
+]
+
+for (const game of trendingTitles) {
+  const createdGame = await prisma.game.create({
+    data: {
+      title: game.title,
+      description: faker.lorem.sentences(2),
+      category: game.category,
+      price: game.price,
+      discount: game.discount,
+      imageUrl: game.imageUrl,
+    },
+  })
+
+  await prisma.trendingGame.create({
+    data: {
+      title: game.title,
+      category: game.category,
+      price: game.price,
+      discount: game.discount,
+      imageUrl: game.imageUrl,
+      gameId: createdGame.id, // 🔗 the relation
+    },
+  })
+}
+
+console.log('✅ Seeded trending games (with gameId linkage)')
 
   // 3) Seed shop games
   const categories = ['Action','Adventure','RPG','Shooter','Strategy','Simulation','Sports','Racing']
   const fakeGames = Array.from({ length: 100 }).map(() => {
     const price    = parseFloat(faker.commerce.price(5, 100, 2))
-    // 30% chance of a discount
     const discount = Math.random() < 0.3
       ? parseFloat((Math.random() * 0.5).toFixed(2))
       : 0

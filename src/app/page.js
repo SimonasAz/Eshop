@@ -4,9 +4,15 @@ import { cookies } from 'next/headers'
 
 export default async function Home() {
   const trendingGames = await prisma.trendingGame.findMany({
-    orderBy: { createdAt: 'desc' },
-    take: 4,
-  })
+  include: { game: true },
+  orderBy: { createdAt: 'desc' },
+  take: 4
+})
+  const mostPlayedGames = await prisma.game.findMany({ 
+    orderBy: { createdAt: 'desc' }, 
+    take: 6
+   })
+
   const userCookie = cookies().get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
   const isAdmin = user?.role === 'ADMIN'
@@ -140,56 +146,31 @@ export default async function Home() {
       </div>
 
       {/* Dynamic Trending Games */}
-      {trendingGames.map(game => (
-        <div key={game.id} className="col-lg-3 col-md-6">
-          <div className="item">
-            <div className="thumb" style={{ position: 'relative' }}>
-              {isAdmin && (
-                <div style={{
-                  position: 'absolute',
-                  top: '10px',
-                  left: '10px',
-                  right: '10px',
-                  display: 'flex',
-                  gap: '8px',
-                  zIndex: 2
-                }}>
-                  <Link
-                    href={`/admin/trending/edit/${game.id}`}
-                    className="btn btn-sm btn-light border"
-                  >
-                    <i className="fa fa-pencil"></i>
-                  </Link>
-                  <Link
-                    href={`/admin/trending/delete/${game.id}`}
-                    className="btn btn-sm btn-danger"
-                  >
-                    <i className="fa fa-trash"></i>
-                  </Link>
-                </div>
-              )}
-              <Link href={`/product-details/${game.id}`}>
-                <img src={game.imageUrl || '/assets/images/placeholder.png'} alt={game.title} />
-              </Link>
-
-              <span className="price">
-                {game.discount ? (
-                  <>
-                    <em>${game.price.toFixed(2)}</em> ${(game.price * (1 - game.discount)).toFixed(2)}
-                  </>
-                ) : `$${game.price.toFixed(2)}`}
-              </span>
-            </div>
-            <div className="down-content">
-              <span className="category">{game.category}</span>
-              <h4>{game.title}</h4>
-              <Link href={`/product-details/${game.id}`}>
-                <i className="fa fa-shopping-bag"></i>
-              </Link>
+              {trendingGames.map(({ id, game }) => (
+          <div key={id} className="col-lg-3 col-md-6">
+            <div className="item">
+              <div className="thumb">
+                <Link href={`/product-details/${game.id}`}>
+                  <img src={game.imageUrl || '/assets/images/placeholder.png'} alt={game.title} />
+                </Link>
+                <span className="price">
+                  {game.discount ? (
+                    <>
+                      <em>${game.price.toFixed(2)}</em> ${(game.price * (1 - game.discount)).toFixed(2)}
+                    </>
+                  ) : `$${game.price.toFixed(2)}`}
+                </span>
+              </div>
+              <div className="down-content">
+                <span className="category">{game.category}</span>
+                <h4>{game.title}</h4>
+                <Link href={`/product-details/${game.id}`}>
+                  <i className="fa fa-shopping-bag"></i>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
 
     {/* Only show this once under the trending games if Admin */}
@@ -207,94 +188,129 @@ export default async function Home() {
 
 
   <div className="section most-played">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="section-heading">
-            <h6>TOP GAMES</h6>
-            <h2>Most Played</h2>
-          </div>
+  <div className="container">
+    <div className="row">
+      <div className="col-lg-6">
+        <div className="section-heading">
+          <h6>TOP GAMES</h6>
+          <h2>Most Played</h2>
         </div>
-        <div className="col-lg-6">
-          <div className="main-button">
-            <Link href="/shop">View All</Link>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-01.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-02.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-03.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-04.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-05.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-2 col-md-6 col-sm-6">
-          <div className="item">
-            <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/top-game-06.jpg" alt=""/></Link>
-            </div>
-            <div className="down-content">
-                <span className="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <Link href="/product-details">Explore</Link>
-            </div>
-          </div>
+      </div>
+      <div className="col-lg-6">
+        <div className="main-button">
+          <Link href="/shop">View All</Link>
         </div>
       </div>
     </div>
+
+    <div className="row">
+      {mostPlayedGames.map(game => (
+        <div key={game.id} className="col-lg-3 col-md-6">
+          <div className="item">
+            <div className="thumb" style={{ position: 'relative' }}>
+              {/* Admin controls */}
+              {isAdmin && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '10px',
+                    left: '10px',
+                    right: '10px',
+                    display: 'flex',
+                    gap: '8px',
+                    zIndex: 2
+                  }}
+                >
+                  <Link href={`/admin/games/edit/${game.id}`} className="btn btn-sm btn-light border">
+                    <i className="fa fa-pencil"></i>
+                  </Link>
+                  <Link href={`/admin/games/delete/${game.id}`} className="btn btn-sm btn-danger">
+                    <i className="fa fa-trash"></i>
+                  </Link>
+                </div>
+              )}
+
+              {/* Game image */}
+              <Link href={`/product-details/${game.id}`}>
+                <img
+                      src={game.imageUrl || '/assets/images/placeholder.png'}
+                      alt={game.title}
+                      style={{
+                        width: '100%',
+                        height: '220px',
+                        objectFit: 'cover'                
+                      }}
+                    />
+              </Link>
+
+              {/* Price badge */}
+              <span style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  backgroundColor: '#0099ff',
+                  color: 'white',
+                  padding: '10px 10px',
+                  borderRadius: '10px',
+                  textAlign: 'center',
+                  lineHeight: 1.3,
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  minWidth: '80px'
+                }}>
+                  {game.discount ? (
+                    <>
+                      <div style={{ textDecoration: 'line-through', fontSize: '12px', opacity: 0.85 }}>
+                        ${game.price.toFixed(2)}
+                      </div>
+                      <div style={{ fontSize: '15px' }}>
+                        ${(game.price * (1 - game.discount)).toFixed(2)}
+                      </div>
+                    </>
+                  ) : (
+                    <div>${game.price.toFixed(2)}</div>
+                  )}
+                </span>
+            </div>
+
+            {/* Category, title, cart icon */}
+            <div  
+                className="down-content"  
+                style={{  
+                  position: 'relative',  
+                  padding: '15px 20px 30px',  
+                  textAlign: 'left'  
+                }}  
+              >  
+                <span className="category">{game.category}</span>  
+                <h4 style={{ margin: '8px 0', fontSize: '16px' }}>{game.title}</h4>
+                  <Link
+                  href={`/product-details/${game.id}`}
+                  style={{
+                    position: 'absolute',
+                    bottom: '25px',        
+                    left: '290px',         
+                    backgroundColor: '#ff556e',
+                    width: '44px',         
+                    height: '44px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'                    
+                  }}
+                >
+                  <i
+                    className="fa fa-shopping-bag"
+                    style={{ color: 'white', fontSize: '18px' }}
+                  ></i>
+                </Link>
+              </div>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
+</div>
 
   <div className="section categories">
     <div className="container">
