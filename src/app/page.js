@@ -35,8 +35,7 @@ export default async function Home() {
                       <li>
                         <Link href="/" className="active">Home</Link>
                       </li>
-                      <li><Link href="/shop">Our Shop</Link></li>
-                      <li><Link href="/product-details">Product Details</Link></li>
+                      <li><Link href="/shop">Our Shop</Link></li>        
                       <li><Link href="/contact">Contact Us</Link></li>
                       <li><a href="/login">Sign In</a></li>
                   </ul>   
@@ -146,31 +145,56 @@ export default async function Home() {
       </div>
 
       {/* Dynamic Trending Games */}
-              {trendingGames.map(({ id, game }) => (
-          <div key={id} className="col-lg-3 col-md-6">
-            <div className="item">
-              <div className="thumb">
-                <Link href={`/product-details/${game.id}`}>
-                  <img src={game.imageUrl || '/assets/images/placeholder.png'} alt={game.title} />
-                </Link>
-                <span className="price">
-                  {game.discount ? (
-                    <>
-                      <em>${game.price.toFixed(2)}</em> ${(game.price * (1 - game.discount)).toFixed(2)}
-                    </>
-                  ) : `$${game.price.toFixed(2)}`}
-                </span>
+               {trendingGames.map(tr => (
+              <div key={tr.id} className="col-lg-3 col-md-6">
+                <div className="item">
+                  <div className="thumb" style={{ position: 'relative' }}>
+                    {isAdmin && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '10px',
+                          left: '10px',
+                          right: '10px',
+                          display: 'flex',
+                          gap: '8px',
+                          zIndex: 2
+                        }}
+                      >
+                        <Link href={`/admin/trending/edit/${tr.id}`} className="btn btn-sm btn-light border">
+                          <i className="fa fa-pencil"></i>
+                        </Link>
+                        <Link href={`/admin/trending/delete/${tr.id}`} className="btn btn-sm btn-danger">
+                          <i className="fa fa-trash"></i>
+                        </Link>
+                      </div>
+                    )}
+                    <Link href={`/product-details/${tr.id}`}>
+                      <img
+                        src={tr.imageUrl || '/assets/images/placeholder.png'}
+                        alt={tr.title}
+                      />
+                    </Link>
+                    <span className="price">
+                      {tr.discount ? (
+                        <>
+                          <em>${tr.price.toFixed(2)}</em> ${ (tr.price * (1 - tr.discount)).toFixed(2) }
+                        </>
+                      ) : (
+                        `$${tr.price.toFixed(2)}`
+                      )}
+                    </span>
+                  </div>
+                  <div className="down-content">
+                    <span className="category">{tr.category}</span>
+                    <h4>{tr.title}</h4>
+                    <Link href={`/product-details/${tr.id}`}>
+                      <i className="fa fa-shopping-bag"></i>
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <div className="down-content">
-                <span className="category">{game.category}</span>
-                <h4>{game.title}</h4>
-                <Link href={`/product-details/${game.id}`}>
-                  <i className="fa fa-shopping-bag"></i>
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
+            ))}
     </div>
 
     {/* Only show this once under the trending games if Admin */}

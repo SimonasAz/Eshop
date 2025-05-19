@@ -15,12 +15,54 @@ export default function CreateGamePage() {
     const price       = parseFloat(formData.get('price'))
     const discount    = parseFloat(formData.get('discount')) || 0
 
-    // first see if they uploaded a file
-    let imageUrl = formData.get('imageUrl')?.toString() || ''
+    // ─── VALIDATIONS ──────────────────────────────────────────────────────
+    if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
+      throw new Error('Title must be a string between 3 and 100 characters.')
+    }
+    if (!description || typeof description !== 'string' || description.trim().length < 10) {
+      throw new Error('Description must be at least 10 characters long.')
+    }
+    if (!category || typeof category !== 'string' || category.trim().length < 3 || category.trim().length > 50) {
+      throw new Error('Category must be a string between 3 and 50 characters.')
+    }
+    if (isNaN(price) || price < 0) {
+      throw new Error('Price must be a valid number ≥ 0.')
+    }
+    if (isNaN(discount) || discount < 0 || discount > 100) {
+      throw new Error('Discount must be between 0 and 100.')
+    }
+
+    // ─── IMAGE URL & FILE ─────────────────────────────────────────────────
+    let imageUrl = ''
+    const inputImageUrl = formData.get('imageUrl')?.toString().trim()
+
+    if (inputImageUrl) {
+      try {
+        // try absolute URL
+        const url = new URL(inputImageUrl)
+        if (url.protocol === 'http:' || url.protocol === 'https:') {
+          imageUrl = inputImageUrl
+        } else {
+          throw new Error()
+        }
+      } catch {
+        // fallback to relative path
+        if (inputImageUrl.startsWith('/')) {
+          imageUrl = inputImageUrl
+        } else {
+          throw new Error('Image URL must be an absolute HTTP/HTTPS URL or start with "/".')
+        }
+      }
+    }
+
     const file = formData.get('imageFile')
     if (file && file.size > 0) {
       if (file.size > MAX_SIZE) {
-        throw new Error('Uploaded file must be under 2 MB')
+        throw new Error('Uploaded file must be under 2 MB.')
+      }
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+      if (!allowedTypes.includes(file.type)) {
+        throw new Error('Only JPEG, PNG, or WEBP images are allowed.')
       }
       const buffer   = Buffer.from(await file.arrayBuffer())
       const filename = `${Date.now()}-${file.name}`
@@ -29,12 +71,20 @@ export default function CreateGamePage() {
       imageUrl = `/uploads/${filename}`
     }
 
+    // ─── DATABASE INSERT ─────────────────────────────────────────────────
     await prisma.game.create({
-      data: { title, description, category, price, discount, imageUrl }
+      data: {
+        title:       title.trim(),
+        description: description.trim(),
+        category:    category.trim(),
+        price,
+        discount,
+        imageUrl
+      }
     })
 
-    revalidatePath('/admin/games')
-    redirect('/admin/games')
+    revalidatePath('/shop')
+    redirect('/shop')
   }
 
   return (
@@ -65,13 +115,17 @@ export default function CreateGamePage() {
         </div>
         <div className="mb-3">
           <label className="form-label">Image URL</label>
-          <input name="imageUrl" type="url" className="form-control" placeholder="http://…" />
+          <input
+            name="imageUrl"
+            type="text"
+            className="form-control"
+            placeholder="http://… or /uploads/…"
+          />
         </div>
         <div className="mb-4">
           <label className="form-label">Or upload file</label>
           <input name="imageFile" type="file" accept="image/*" className="form-control" />
         </div>
-
         <button
           type="submit"
           className="btn"

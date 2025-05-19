@@ -14,7 +14,7 @@ export default async function ProductDetails({ params }) {
     orderBy: { createdAt: 'desc' }
   })
 
-  // Read logged‐in user from cookie
+  // Read logged-in user from cookie
   const userCookie = cookies().get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
 
@@ -32,7 +32,11 @@ export default async function ProductDetails({ params }) {
                 <ul className="nav">
                   <li><Link href="/">Home</Link></li>
                   <li><Link href="/shop">Our Shop</Link></li>
-                  <li><Link href={`/product-details/${gameId}`} className="active">Product Details</Link></li>
+                  <li>
+                    <Link href={`/product-details/${gameId}`} className="active">
+                      Product Details
+                    </Link>
+                  </li>
                   <li><Link href="/contact">Contact Us</Link></li>
                   <li><Link href="/login">Sign In</Link></li>
                 </ul>
@@ -61,7 +65,6 @@ export default async function ProductDetails({ params }) {
       <div className="single-product section">
         <div className="container">
           <div className="row">
-
             {/* Left: Image */}
             <div className="col-lg-6">
               <div className="left-image">
@@ -75,9 +78,12 @@ export default async function ProductDetails({ params }) {
               <span className="price">
                 {game.discount ? (
                   <>
-                    <em>${game.price.toFixed(2)}</em> ${(game.price * (1 - game.discount)).toFixed(2)}
+                    <em>${game.price.toFixed(2)}</em>{' '}
+                    ${(game.price * (1 - game.discount)).toFixed(2)}
                   </>
-                ) : `$${game.price.toFixed(2)}`}
+                ) : (
+                  `$${game.price.toFixed(2)}`
+                )}
               </span>
               <p>{game.description}</p>
               <form id="number" action="#">
@@ -113,6 +119,7 @@ export default async function ProductDetails({ params }) {
       {/* ===== Description / Reviews Tabs ===== */}
       <ReviewSection
         gameId={gameId}
+        postUrl={`/api/games/${gameId}/reviews`}   /* ← new prop */
         description={game.description}
         initialReviews={reviews}
         user={user}

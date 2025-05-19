@@ -16,8 +16,7 @@ export default function Contact() {
                 </Link>
                 <ul className="nav">
                   <li><Link href="/">Home</Link></li>
-                  <li><Link href="/shop">Our Shop</Link></li>
-                  <li><Link href="/product-details">Product Details</Link></li>
+                  <li><Link href="/shop">Our Shop</Link></li>                  
                   <li><Link href="/contact" className="active">Contact Us</Link></li>
                   <li><Link href="/login">Sign In</Link></li>
                 </ul>

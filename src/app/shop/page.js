@@ -36,8 +36,7 @@ export default async function ShopPage({ searchParams }) {
                 </Link>
                 <ul className="nav">
                   <li><Link href="/">Home</Link></li>
-                  <li><Link href="/shop" className="active">Our Shop</Link></li>
-                  <li><Link href="/product-details">Product Details</Link></li>
+                  <li><Link href="/shop" className="active">Our Shop</Link></li>                  
                   <li><Link href="/contact">Contact Us</Link></li>
                   <li><Link href="/login">Sign In</Link></li>
                 </ul>

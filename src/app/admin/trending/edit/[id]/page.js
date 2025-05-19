@@ -9,59 +9,98 @@ export default async function EditTrendingGame({ params }) {
   const game = await prisma.trendingGame.findUnique({
     where: { id: Number(params.id) }
   })
-  if (!game) redirect('/admin/trending')
+  if (!game) redirect('/')
 
   async function handleEdit(formData) {
     'use server'
-    const MAX_SIZE = 2 * 1024 * 1024 
-    const title    = formData.get('title').toString()
-    const category = formData.get('category').toString()
-    const price    = parseFloat(formData.get('price'))
-    const discount = parseFloat(formData.get('discount')) || 0
 
-    let imageUrl = formData.get('imageUrl')?.toString() || game.imageUrl
-        const file = formData.get('imageFile')
-        if (file && file.size > 0) {
-          if (file.size > MAX_SIZE) {
-            throw new Error('Uploaded file must be under 2 MB')
-          }
-          const buffer   = Buffer.from(await file.arrayBuffer())
-          const filename = `${Date.now()}-${file.name}`
-          const filepath = path.join(process.cwd(), 'public', 'uploads', filename)
-          await fs.promises.writeFile(filepath, buffer)
-          imageUrl = `/uploads/${filename}`
+    const MAX_SIZE = 2 * 1024 * 1024
+
+    const title       = formData.get('title')
+    const category    = formData.get('category')
+    const rawPrice    = formData.get('price')
+    const rawDiscount = formData.get('discount')
+    const price       = rawPrice ? parseFloat(rawPrice.toString()) : NaN
+    const discount    = rawDiscount ? parseFloat(rawDiscount.toString()) : 0
+
+    // ─── VALIDATIONS ──────────────────────────────────────────────────────
+    if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
+      throw new Error('Title must be a string between 3 and 100 characters.')
+    }
+    if (!category || typeof category !== 'string' || category.trim().length < 3 || category.trim().length > 50) {
+      throw new Error('Category must be a string between 3 and 50 characters.')
+    }
+    if (isNaN(price) || price < 0) {
+      throw new Error('Price must be a valid number ≥ 0.')
+    }
+    if (isNaN(discount) || discount < 0 || discount > 100) {
+      throw new Error('Discount must be between 0 and 100.')
+    }
+
+    // ─── IMAGE URL & FILE ─────────────────────────────────────────────────
+    let imageUrl = game.imageUrl
+    const inputImageUrl = formData.get('imageUrl')?.toString().trim()
+
+    if (inputImageUrl) {
+      try {
+        const url = new URL(inputImageUrl)
+        if (url.protocol === 'http:' || url.protocol === 'https:') {
+          imageUrl = inputImageUrl
+        } else {
+          throw new Error()
         }
+      } catch {
+        if (inputImageUrl.startsWith('/')) {
+          imageUrl = inputImageUrl
+        } else {
+          throw new Error('Image URL must be an absolute HTTP/HTTPS URL or start with "/".')
+        }
+      }
+    }
 
+    const file = formData.get('imageFile')
+    if (file && file.size > 0) {
+      if (file.size > MAX_SIZE) {
+        throw new Error('Uploaded file must be under 2 MB.')
+      }
+      const allowed = ['image/jpeg', 'image/png', 'image/webp']
+      if (!allowed.includes(file.type)) {
+        throw new Error('Only JPEG, PNG, or WEBP images are allowed.')
+      }
+      const buffer   = Buffer.from(await file.arrayBuffer())
+      const filename = `${Date.now()}-${file.name}`
+      const filepath = path.join(process.cwd(), 'public', 'uploads', filename)
+      await fs.promises.writeFile(filepath, buffer)
+      imageUrl = `/uploads/${filename}`
+    }
+
+    // ─── DATABASE UPDATE ──────────────────────────────────────────────────
     await prisma.trendingGame.update({
       where: { id: game.id },
-      data: { title, category, price, discount, imageUrl }
+      data: {
+        title:    title.trim(),
+        category: category.trim(),
+        price,
+        discount,
+        imageUrl
+      }
     })
 
-    revalidatePath('/admin/trending')
-    redirect('/admin/trending')
+    revalidatePath('/')
+    redirect('/')
   }
 
   return (
     <div className="container py-5">
       <h2 className="mb-4 text-primary">✏️ Edit Trending Game</h2>
-      <form action={handleEdit} encType="multipart/form-data">
+      <form action={handleEdit}>
         <div className="mb-3">
           <label className="form-label">Title</label>
-          <input
-            name="title"
-            defaultValue={game.title}
-            className="form-control"
-            required
-          />
+          <input name="title" defaultValue={game.title} className="form-control" required />
         </div>
         <div className="mb-3">
           <label className="form-label">Category</label>
-          <input
-            name="category"
-            defaultValue={game.category}
-            className="form-control"
-            required
-          />
+          <input name="category" defaultValue={game.category} className="form-control" required />
         </div>
         <div className="row">
           <div className="col-md-6 mb-3">
@@ -90,30 +129,24 @@ export default async function EditTrendingGame({ params }) {
           <label className="form-label">Image URL</label>
           <input
             name="imageUrl"
-            type="url"
+            type="text"
             defaultValue={game.imageUrl}
             className="form-control"
+            placeholder="http://… or /uploads/…"
           />
         </div>
         <div className="mb-4">
           <label className="form-label">Or upload file</label>
           <input name="imageFile" type="file" accept="image/*" className="form-control" />
         </div>
-
         <button
           type="submit"
           className="btn"
-          style={{
-            backgroundColor: '#ee626b',
-            borderColor: '#ee626b',
-            color: 'white'
-          }}
+          style={{ backgroundColor: '#ee626b', borderColor: '#ee626b', color: 'white' }}
         >
           Update Trending Game
         </button>{' '}
-        <Link href="/admin/trending" className="btn btn-secondary">
-          Cancel
-        </Link>
+        <Link href="/" className="btn btn-secondary">Back to Shop</Link>
       </form>
     </div>
   )
