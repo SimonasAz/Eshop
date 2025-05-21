@@ -38,6 +38,11 @@ export default async function ShopPage({ searchParams }) {
                   <li><Link href="/">Home</Link></li>
                   <li><Link href="/shop" className="active">Our Shop</Link></li>                  
                   <li><Link href="/contact">Contact Us</Link></li>
+                  {isAdmin && (
+                        <li>
+                          <Link href="/admin/users">Manage Users</Link>
+                        </li>
+                      )}
                   <li><Link href="/login">Sign In</Link></li>
                 </ul>
                 <a href="#" className="menu-trigger"><span>Menu</span></a>

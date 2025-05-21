@@ -37,6 +37,11 @@ export default async function Home() {
                       </li>
                       <li><Link href="/shop">Our Shop</Link></li>        
                       <li><Link href="/contact">Contact Us</Link></li>
+                      {isAdmin && (
+                        <li>
+                          <Link href="/admin/users">Manage Users</Link>
+                        </li>
+                      )}
                       <li><a href="/login">Sign In</a></li>
                   </ul>   
                   <a href="#" className="menu-trigger">

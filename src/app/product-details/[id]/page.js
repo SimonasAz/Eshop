@@ -17,6 +17,7 @@ export default async function ProductDetails({ params }) {
   // Read logged-in user from cookie
   const userCookie = cookies().get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
+  const isAdmin = user?.role === 'ADMIN'
 
   return (
     <>
@@ -37,6 +38,11 @@ export default async function ProductDetails({ params }) {
                       Product Details
                     </Link>
                   </li>
+                  {isAdmin && (
+                        <li>
+                          <Link href="/admin/users">Manage Users</Link>
+                        </li>
+                      )}
                   <li><Link href="/contact">Contact Us</Link></li>
                   <li><Link href="/login">Sign In</Link></li>
                 </ul>
@@ -68,8 +74,18 @@ export default async function ProductDetails({ params }) {
             {/* Left: Image */}
             <div className="col-lg-6">
               <div className="left-image">
-                <img src={game.imageUrl || '/assets/images/placeholder.png'} alt={game.title} />
-              </div>
+                  <img
+                    src={game.imageUrl || '/assets/images/placeholder.png'}
+                    alt={game.title}
+                    style={{
+                      width: '150%',
+                      height: '500px', // or adjust based on your design
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      boxShadow: '0 0 12px rgba(0,0,0,0.1)',
+                    }}
+                  />
+                </div>
             </div>
 
             {/* Right: Details */}
