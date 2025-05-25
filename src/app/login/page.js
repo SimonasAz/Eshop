@@ -102,7 +102,7 @@ export default function LoginPage() {
                   </div>
                 </form>
                 <div className="text-center mt-4">
-                  <p>Don't have an account? <Link href="/register">Register here</Link></p>
+                  <p>Don&apos;t have an account? <Link href="/register">Register here</Link></p>
                 </div>
               </div>
             </div>
