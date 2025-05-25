@@ -69,7 +69,7 @@ export default function CreateTrendingGamePage() {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE ────────────────────────────────────────────────────────
+    // ─── DATABASE 
     await prisma.trendingGame.create({
       data: {
         title:    title.trim(),

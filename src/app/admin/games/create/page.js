@@ -71,7 +71,7 @@ export default function CreateGamePage() {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE INSERT ─────────────────────────────────────────────────
+    // ─── DATABASE INSERT
     await prisma.game.create({
       data: {
         title:       title.trim(),

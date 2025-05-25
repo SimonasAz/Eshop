@@ -14,7 +14,7 @@ export default async function ProductDetails({ params }) {
     orderBy: { createdAt: 'desc' }
   })
 
-  // Read logged-in user from cookie
+  
   const userCookie = cookies().get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
   const isAdmin = user?.role === 'ADMIN'
@@ -71,15 +71,14 @@ export default async function ProductDetails({ params }) {
       <div className="single-product section">
         <div className="container">
           <div className="row">
-            {/* Left: Image */}
-            <div className="col-lg-6">
+              <div className="col-lg-6">
               <div className="left-image">
                   <img
                     src={game.imageUrl || '/assets/images/placeholder.png'}
                     alt={game.title}
                     style={{
                       width: '150%',
-                      height: '500px', // or adjust based on your design
+                      height: '500px', 
                       objectFit: 'cover',
                       borderRadius: '12px',
                       boxShadow: '0 0 12px rgba(0,0,0,0.1)',
@@ -135,7 +134,7 @@ export default async function ProductDetails({ params }) {
       {/* ===== Description / Reviews Tabs ===== */}
       <ReviewSection
         gameId={gameId}
-        postUrl={`/api/games/${gameId}/reviews`}   /* ← new prop */
+        postUrl={`/api/games/${gameId}/reviews`}   
         description={game.description}
         initialReviews={reviews}
         user={user}

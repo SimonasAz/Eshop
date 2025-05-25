@@ -15,7 +15,7 @@ export default function DeleteUserButton({ userId }) {
     })
 
     if (res.ok) {
-      router.refresh() // or router.push('/admin/users')
+      router.refresh() 
     } else {
       const { error } = await res.json()
       alert(`❌ ${error || 'Delete failed'}`)

@@ -79,7 +79,7 @@ export default async function EditGame({ params }) {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE UPDATE ──────────────────────────────────────────────────
+    // ─── DATABASE UPDATE
     await prisma.game.update({
       where: { id: game.id },
       data: {
