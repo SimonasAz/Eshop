@@ -1,6 +1,7 @@
 import { prisma } from '@/app/lib/prisma'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
+import Image from 'next/image'
 
 export default async function Home() {
   const trendingGames = await prisma.trendingGame.findMany({
@@ -27,7 +28,7 @@ export default async function Home() {
                 <nav className="main-nav">
                     {/* Logo Start */}
                     <Link href="/" className="logo">
-                        <img src="/assets/images/logo.png" alt="" style={{width: '158px'}}/>
+                        <Image src="/assets/images/logo.png" alt="" style={{width: '158px'}}/>
                     </Link>
                     {/* Logo End  */}
                     {/* Menu Start */}
@@ -78,7 +79,7 @@ export default async function Home() {
         </div>
         <div className="col-lg-4 offset-lg-2">
           <div className="right-image">
-            <img src="/assets/images/banner-image.jpg" alt=""/>
+            <Image src="/assets/images/banner-image.jpg" alt=""/>
             <span className="price">$22</span>
             <span className="offer">-40%</span>
           </div>
@@ -94,7 +95,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-01.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
+                <Image src="/assets/images/featured-01.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
               </div>
               <h4>Free Storage</h4>
             </div>
@@ -104,7 +105,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-02.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
+                <Image src="/assets/images/featured-02.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
               </div>
               <h4>User More</h4>
             </div>
@@ -114,7 +115,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-03.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
+                <Image src="/assets/images/featured-03.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block'}}/>
               </div>
               <h4>Reply Ready</h4>
             </div>
@@ -124,7 +125,7 @@ export default async function Home() {
           <Link href="#">
             <div className="item">
               <div className="image">
-                <img src="/assets/images/featured-04.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
+                <Image src="/assets/images/featured-04.png" alt="" style={{ maxWidth: '60px', margin: ' 14px auto 0', display: 'block' }}/>
               </div>
               <h4>Easy Layout</h4>
             </div>
@@ -175,7 +176,7 @@ export default async function Home() {
                       </div>
                     )}
                     <Link href={`/product-details/${tr.id}`}>
-                      <img
+                      <Image
                         src={tr.imageUrl || '/assets/images/placeholder.png'}
                         alt={tr.title}
                       />
@@ -261,7 +262,7 @@ export default async function Home() {
 
               {/* Game image */}
               <Link href={`/product-details/${game.id}`}>
-                <img
+                <Image
                       src={game.imageUrl || '/assets/images/placeholder.png'}
                       alt={game.title}
                       style={{
@@ -354,7 +355,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/categories-01.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-01.jpg" alt=""/></Link>
             </div>
           </div>
         </div>
@@ -362,7 +363,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/categories-05.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-05.jpg" alt=""/></Link>
             </div>
           </div>
         </div>
@@ -370,7 +371,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/categories-03.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-03.jpg" alt=""/></Link>
             </div>
           </div>
         </div>
@@ -378,7 +379,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/categories-04.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-04.jpg" alt=""/></Link>
             </div>
           </div>
         </div>
@@ -386,7 +387,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><img src="/assets/images/categories-05.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-05.jpg" alt=""/></Link>
             </div>
           </div>
         </div>
