@@ -354,8 +354,8 @@ export default async function Home() {
         <div className="col-lg col-sm-6 col-xs-12">
           <div className="item">
             <h4>Action</h4>
-            <div className="thumb">
-              <Link href="/product-details"><Image src="/assets/images/categories-01.jpg" alt=""/></Link>
+            <div className="thumb"> 
+              <Link href="/product-details"><Image src="/assets/images/categories-01.jpg" alt="" width={158} height={50}/></Link>
             </div>
           </div>
         </div>
@@ -363,7 +363,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><Image src="/assets/images/categories-05.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-05.jpg" alt="" width={158} height={50}/></Link>
             </div>
           </div>
         </div>
@@ -371,7 +371,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><Image src="/assets/images/categories-03.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-03.jpg" alt="" width={158} height={50}/></Link>
             </div>
           </div>
         </div>
@@ -379,7 +379,7 @@ export default async function Home() {
           <div className="item">
             <h4>Action</h4>
             <div className="thumb">
-              <Link href="/product-details"><Image src="/assets/images/categories-04.jpg" alt=""/></Link>
+              <Link href="/product-details"><Image src="/assets/images/categories-04.jpg" alt="" width={158} height={50}/></Link>
             </div>
           </div>
         </div>
