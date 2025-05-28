@@ -1,4 +1,3 @@
-// src/app/api/games/[id]/reviews/route.js
 import { prisma } from '@/app/lib/prisma'
 import { NextResponse } from 'next/server'
 
@@ -10,7 +9,6 @@ export async function POST(request, { params }) {
   const userCookie = request.cookies.get('user')
   const user       = userCookie && JSON.parse(userCookie.value)
 
-  // must be logged in & supply both fields
   if (!user || !rawText || !rawRating) {
     return NextResponse.json(
       { error: 'Unauthorized or missing fields' },
@@ -21,7 +19,6 @@ export async function POST(request, { params }) {
   const text   = rawText.toString().trim()
   const rating = parseInt(rawRating.toString(), 10)
 
-  // text length
   if (text.length < 5) {
     return NextResponse.json(
       { error: 'Review must be at least 5 characters.' },
@@ -35,7 +32,6 @@ export async function POST(request, { params }) {
     )
   }
 
-  // rating bounds
   if (isNaN(rating) || rating < 1 || rating > 5) {
     return NextResponse.json(
       { error: 'Rating must be an integer between 1 and 5.' },
@@ -43,7 +39,6 @@ export async function POST(request, { params }) {
     )
   }
 
-  // duplicate check
   const exists = await prisma.review.findFirst({
     where: { userId: user.id, gameId, text }
   })
@@ -54,7 +49,6 @@ export async function POST(request, { params }) {
     )
   }
 
-  // create it
   await prisma.review.create({
     data: { text, rating, userId: user.id, gameId }
   })

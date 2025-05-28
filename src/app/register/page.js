@@ -28,7 +28,6 @@ export default function RegisterPage() {
 
   return (
     <>
-      {/* Header */}
       <header className="header-area header-sticky">
         <div className="container">
           <div className="row">
@@ -50,7 +49,6 @@ export default function RegisterPage() {
         </div>
       </header>
 
-      {/* Page Heading */}
       <div className="page-heading header-text">
         <div className="container">
           <div className="row">
@@ -62,7 +60,6 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Registration Form */}
       <div className="section contact-page" style={{ paddingTop: '80px' }}>
         <div className="container">
           <div className="row justify-content-center">
@@ -109,8 +106,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer>
+    <footer>
         <div className="container">
           <div className="col-lg-12">
             <p>Copyright © 2048 LUGX Gaming Company. All rights reserved.

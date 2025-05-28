@@ -23,7 +23,6 @@ export default async function EditTrendingGame({ params }) {
     const price       = rawPrice ? parseFloat(rawPrice.toString()) : NaN
     const discount    = rawDiscount ? parseFloat(rawDiscount.toString()) : 0
 
-    // ─── VALIDATIONS
     if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
       throw new Error('Title must be a string between 3 and 100 characters.')
     }
@@ -37,7 +36,6 @@ export default async function EditTrendingGame({ params }) {
       throw new Error('Discount must be between 0 and 100.')
     }
 
-    // ─── IMAGE URL & FILE 
     let imageUrl = game.imageUrl
     const inputImageUrl = formData.get('imageUrl')?.toString().trim()
 
@@ -74,7 +72,6 @@ export default async function EditTrendingGame({ params }) {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE UPDATE 
     await prisma.trendingGame.update({
       where: { id: game.id },
       data: {

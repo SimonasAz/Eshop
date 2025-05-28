@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker'
 const prisma = new PrismaClient()
 
 async function main() {
-  // 1) Admin user upsert
+  
   const hashedPassword = await bcrypt.hash('admin123', 10)
   await prisma.user.upsert({
     where: { email: 'admin@example.com' },
@@ -18,7 +18,7 @@ async function main() {
   })
   console.log('✅ Admin user created')
 
-  // 2) Seed trending games
+  
   const trendingTitles = [
   { title: "Assassin's Creed Mirage", category: 'Action', price: 49.99, discount: 0.2, imageUrl: '/assets/images/trending-01.jpg' },
   { title: 'Final Fantasy XVI',       category: 'RPG',    price: 59.99, discount: 0.15, imageUrl: '/assets/images/trending-02.jpg' },
@@ -45,14 +45,14 @@ for (const game of trendingTitles) {
       price: game.price,
       discount: game.discount,
       imageUrl: game.imageUrl,
-      gameId: createdGame.id, // 🔗 the relation
+      gameId: createdGame.id,
     },
   })
 }
 
 console.log('✅ Seeded trending games (with gameId linkage)')
 
-  // 3) Seed shop games
+ 
   const categories = ['Action','Adventure','RPG','Shooter','Strategy','Simulation','Sports','Racing']
   const fakeGames = Array.from({ length: 100 }).map(() => {
     const price    = parseFloat(faker.commerce.price(5, 100, 2))
@@ -72,7 +72,7 @@ console.log('✅ Seeded trending games (with gameId linkage)')
   await prisma.game.createMany({ data: fakeGames })
   console.log(`✅ Seeded ${fakeGames.length} shop games`)
 
-  // 4) Seed regular users
+  
 const userCount = 5
 const users = []
 for (let i = 0; i < userCount; i++) {

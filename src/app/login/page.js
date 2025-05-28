@@ -29,7 +29,6 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* Header */}
       <header className="header-area header-sticky">
         <div className="container">
           <div className="row">
@@ -51,7 +50,6 @@ export default function LoginPage() {
         </div>
       </header>
 
-      {/* Page Banner */}
       <div className="page-heading header-text">
         <div className="container">
           <div className="row">
@@ -63,7 +61,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Sign In Form */}
       <div className="section contact-page" style={{ paddingTop: '80px' }}>
         <div className="container">
           <div className="row justify-content-center">
@@ -110,7 +107,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer>
         <div className="container">
           <div className="col-lg-12">

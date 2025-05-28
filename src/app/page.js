@@ -19,18 +19,17 @@ export default async function Home() {
   return (
     <>
 
-  {/* Header Area Start */}
+  
   <header className="header-area header-sticky">
     <div className="container">
         <div className="row">
             <div className="col-12">
                 <nav className="main-nav">
-                    {/* Logo Start */}
+                    
                     <Link href="/" className="logo">
                         <img src="/assets/images/logo.png" alt="" style={{width: '158px'}}/>
                     </Link>
-                    {/* Logo End  */}
-                    {/* Menu Start */}
+                  
                     <ul className="nav">
                       <li>
                         <Link href="/" className="active">Home</Link>
@@ -47,13 +46,12 @@ export default async function Home() {
                   <a href="#" className="menu-trigger">
                     <span>Menu</span>
                   </a>
-                    {/* Menu End */}
+
                 </nav>
             </div>
         </div>
     </div>
   </header>
-  {/* Header Area End */}
 
   <div className="main-banner">
     <div className="container">
@@ -149,7 +147,6 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Dynamic Trending Games */}
                {trendingGames.map(tr => (
               <div key={tr.id} className="col-lg-3 col-md-6">
                 <div className="item">
@@ -202,7 +199,6 @@ export default async function Home() {
             ))}
     </div>
 
-    {/* Only show this once under the trending games if Admin */}
     {isAdmin && (
       <div className="row">
         <div className="col-12 text-center" style={{ marginTop: '30px' }}>
@@ -237,7 +233,6 @@ export default async function Home() {
         <div key={game.id} className="col-lg-3 col-md-6">
           <div className="item">
             <div className="thumb" style={{ position: 'relative' }}>
-              {/* Admin controls */}
               {isAdmin && (
                 <div
                   style={{
@@ -259,7 +254,6 @@ export default async function Home() {
                 </div>
               )}
 
-              {/* Game img */}
               <Link href={`/product-details/${game.id}`}>
                 <img
                       src={game.imageUrl || '/assets/images/placeholder.png'}
@@ -272,7 +266,6 @@ export default async function Home() {
                     />
               </Link>
 
-              {/* Price badge */}
               <span style={{
                   position: 'absolute',
                   top: '10px',
@@ -302,7 +295,6 @@ export default async function Home() {
                 </span>
             </div>
 
-            {/* Category, title, cart icon */}
             <div  
                 className="down-content"  
                 style={{  

@@ -28,7 +28,7 @@ body {
 .trending .item .thumb {
   position: relative;
   width: 100%;
-  padding-top: 80%;   /* 1:1 aspect ratio */
+  padding-top: 80%; 
   overflow: hidden;
 }
 .trending-box .item .thumb img,
@@ -41,16 +41,13 @@ body {
   object-fit: cover;
 }
 
-/* -------------------------------------------------------------------
-   Center those “features” icons perfectly in their circles
-------------------------------------------------------------------- */
 .features .item .image {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .features .item .image img {
-  max-width: 60px;     /* adjust as needed */
+  max-width: 60px;    
   max-height: 60px;
 }
 

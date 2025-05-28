@@ -15,7 +15,6 @@ export default function CreateGamePage() {
     const price       = parseFloat(formData.get('price'))
     const discount    = parseFloat(formData.get('discount')) || 0
 
-    // ─── VALIDATIONS ──────────────────────────────────────────────────────
     if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
       throw new Error('Title must be a string between 3 and 100 characters.')
     }
@@ -32,13 +31,11 @@ export default function CreateGamePage() {
       throw new Error('Discount must be between 0 and 100.')
     }
 
-    // ─── IMAGE URL & FILE ─────────────────────────────────────────────────
     let imageUrl = ''
     const inputImageUrl = formData.get('imageUrl')?.toString().trim()
 
     if (inputImageUrl) {
       try {
-        // try absolute URL
         const url = new URL(inputImageUrl)
         if (url.protocol === 'http:' || url.protocol === 'https:') {
           imageUrl = inputImageUrl
@@ -46,7 +43,6 @@ export default function CreateGamePage() {
           throw new Error()
         }
       } catch {
-        // fallback to relative path
         if (inputImageUrl.startsWith('/')) {
           imageUrl = inputImageUrl
         } else {
@@ -71,7 +67,6 @@ export default function CreateGamePage() {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE INSERT
     await prisma.game.create({
       data: {
         title:       title.trim(),

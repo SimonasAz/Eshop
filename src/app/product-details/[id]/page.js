@@ -21,7 +21,6 @@ export default async function ProductDetails({ params }) {
 
   return (
     <>
-      {/* ===== Header ===== */}
       <header className="header-area header-sticky">
         <div className="container">
           <div className="row">
@@ -53,7 +52,6 @@ export default async function ProductDetails({ params }) {
         </div>
       </header>
 
-      {/* ===== Page Heading ===== */}
       <div className="page-heading header-text">
         <div className="container">
           <div className="row">
@@ -67,7 +65,6 @@ export default async function ProductDetails({ params }) {
         </div>
       </div>
 
-      {/* ===== Single Product ===== */}
       <div className="single-product section">
         <div className="container">
           <div className="row">
@@ -87,7 +84,6 @@ export default async function ProductDetails({ params }) {
                 </div>
             </div>
 
-            {/* Right: Details */}
             <div className="col-lg-6 align-self-center">
               <h4>{game.title}</h4>
               <span className="price">
@@ -123,7 +119,6 @@ export default async function ProductDetails({ params }) {
               </ul>
             </div>
 
-            {/* Separator */}
             <div className="col-lg-12">
               <div className="sep"></div>
             </div>
@@ -131,7 +126,6 @@ export default async function ProductDetails({ params }) {
         </div>
       </div>
 
-      {/* ===== Description / Reviews Tabs ===== */}
       <ReviewSection
         gameId={gameId}
         postUrl={`/api/games/${gameId}/reviews`}   
@@ -140,7 +134,6 @@ export default async function ProductDetails({ params }) {
         user={user}
       />
 
-      {/* ===== Footer ===== */}
       <footer>
         <div className="container">
           <div className="col-lg-12">

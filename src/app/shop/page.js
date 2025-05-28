@@ -1,31 +1,26 @@
-// src/app/shop/page.js
 import { prisma } from '@/app/lib/prisma'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 export default async function ShopPage({ searchParams }) {
-  const page     = Math.max(1, parseInt(searchParams.page, 10) || 1)
+  const page = Math.max(1, parseInt(searchParams.page, 10) || 1)
   const pageSize = 40
 
-  // count + total pages
-  const total      = await prisma.game.count()
+  const total = await prisma.game.count()
   const totalPages = Math.ceil(total / pageSize)
 
-  // fetch 40 games
   const games = await prisma.game.findMany({
     orderBy: { id: 'asc' },
     skip:  (page - 1) * pageSize,
     take:  pageSize,
   })
 
-  // is admin?
   const userCookie = cookies().get('user')
-  const user       = userCookie ? JSON.parse(userCookie.value) : null
-  const isAdmin    = user?.role === 'ADMIN'
+  const user = userCookie ? JSON.parse(userCookie.value) : null
+  const isAdmin  = user?.role === 'ADMIN'
 
   return (
     <>
-      {/* ***** Header Area ***** */}
       <header className="header-area header-sticky">
         <div className="container">
           <div className="row">
@@ -52,7 +47,6 @@ export default async function ShopPage({ searchParams }) {
         </div>
       </header>
 
-      {/* ***** Page Heading ***** */}
       <div className="page-heading header-text">
         <div className="container">
           <div className="row">
@@ -66,10 +60,8 @@ export default async function ShopPage({ searchParams }) {
         </div>
       </div>
 
-      {/* ***** Shop Section ***** */}
       <div className="section trending">
         <div className="container">
-          {/* Admin “Add New Game” button */}
           {isAdmin && (
             <div className="row">
               <div className="col-12 text-center mb-4">
@@ -80,7 +72,6 @@ export default async function ShopPage({ searchParams }) {
             </div>
           )}
 
-          {/* Games Grid */}
           <div className="row trending-box">
             {games.map(game => (
               <div
@@ -89,7 +80,6 @@ export default async function ShopPage({ searchParams }) {
               >
                 <div className="item">
                   <div className="thumb" style={{ position: 'relative' }}>
-                    {/* Admin Edit/Delete (top-left) */}
                     {isAdmin && (
                       <div
                         style={{
@@ -118,7 +108,6 @@ export default async function ShopPage({ searchParams }) {
                       </div>
                     )}
 
-                    {/* Game Image */}
                     <Link href={`/product-details/${game.id}`}>
                       <img
                         src={game.imageUrl || '/assets/images/placeholder.png'}
@@ -126,7 +115,7 @@ export default async function ShopPage({ searchParams }) {
                       />
                     </Link>
 
-                    {/* Price / Discount Badge */}
+
                     <span className="price">
                       {game.discount ? (
                         <>
@@ -139,7 +128,6 @@ export default async function ShopPage({ searchParams }) {
                     </span>
                   </div>
 
-                  {/* Title & Category */}
                   <div className="down-content">
                     <span className="category">{game.category}</span>
                     <h4>{game.title}</h4>
@@ -152,7 +140,6 @@ export default async function ShopPage({ searchParams }) {
             ))}
           </div>
 
-          {/* Pagination */}
           <div className="row">
             <div className="col-lg-12">
               <ul className="pagination">

@@ -108,7 +108,6 @@ export default function ReviewSection({
     <div className="more-info">
       <div className="container">
         <div className="tabs-content">
-          {/* Tabs */}
           <ul className="nav nav-tabs" role="tablist">
             <li className="nav-item">
               <button
@@ -128,7 +127,6 @@ export default function ReviewSection({
             </li>
           </ul>
 
-          {/* Tab Content */}
           <div className="tab-content">
             {tab === 'description' && (
               <div className="tab-pane fade show active">
@@ -174,7 +172,6 @@ export default function ReviewSection({
                   <p>No reviews yet.</p>
                 )}
 
-                {/* Form */}
                 {user ? (
                   <form
                     onSubmit={handleSubmit}

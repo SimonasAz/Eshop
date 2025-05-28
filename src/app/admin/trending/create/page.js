@@ -16,7 +16,6 @@ export default function CreateTrendingGamePage() {
     const price    = parseFloat(formData.get('price'))
     const discount = parseFloat(formData.get('discount')) || 0
 
-    // ─── VALIDATION ─────────────────────────────────────────────────────
     if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
       throw new Error('Title must be a string between 3 and 100 characters.')
     }
@@ -30,13 +29,12 @@ export default function CreateTrendingGamePage() {
       throw new Error('Discount must be between 0 and 100.')
     }
 
-    // ─── IMAGE URL & FILE ───────────────────────────────────────────────
     let imageUrl = ''
     const inputImageUrl = formData.get('imageUrl')?.toString().trim()
 
     if (inputImageUrl) {
       try {
-        // absolute URL?
+
         const url = new URL(inputImageUrl)
         if (url.protocol === 'http:' || url.protocol === 'https:') {
           imageUrl = inputImageUrl
@@ -44,7 +42,7 @@ export default function CreateTrendingGamePage() {
           throw new Error()
         }
       } catch {
-        // relative path?
+
         if (inputImageUrl.startsWith('/')) {
           imageUrl = inputImageUrl
         } else {
@@ -69,7 +67,6 @@ export default function CreateTrendingGamePage() {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE 
     await prisma.trendingGame.create({
       data: {
         title:    title.trim(),
