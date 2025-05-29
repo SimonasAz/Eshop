@@ -310,7 +310,7 @@ export default async function Home() {
                   style={{
                     position: 'absolute',
                     bottom: '25px',        
-                    left: '290px',         
+                    left: '270px',         
                     backgroundColor: '#ff556e',
                     width: '44px',         
                     height: '44px',
