@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server'
 
 export async function DELETE(request, { params }) {
   const reviewId = parseInt(params.id, 10)
-  const userCookie = request.cookies.get('user')
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
   const user = userCookie && JSON.parse(userCookie.value)
 
   if (!user) {
@@ -31,7 +32,8 @@ export async function PUT(request, { params }) {
   const reviewId = parseInt(params.id, 10)
   const body = await request.json()
   const { text: rawText, rating: rawRating } = body
-  const userCookie = request.cookies.get('user')
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
   const user = userCookie && JSON.parse(userCookie.value)
 
   if (!user || !rawText || !rawRating) {

@@ -6,7 +6,8 @@ export async function POST(request, { params }) {
   const form       = await request.formData()
   const rawText    = form.get('text')
   const rawRating  = form.get('rating')
-  const userCookie = request.cookies.get('user')
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
   const user       = userCookie && JSON.parse(userCookie.value)
 
   if (!user || !rawText || !rawRating) {
