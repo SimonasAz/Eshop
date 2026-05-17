@@ -15,7 +15,8 @@ export default async function ShopPage({ searchParams }) {
     take:  pageSize,
   })
 
-  const userCookie = cookies().get('user')
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
   const isAdmin  = user?.role === 'ADMIN'
 

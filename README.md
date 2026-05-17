@@ -1,36 +1,219 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gaming Store Web Application
 
-## Getting Started
+A full-stack gaming marketplace web application built with Next.js, Prisma ORM, PostgreSQL, and modern full-stack development practices.
 
-First, run the development server:
+The project includes authentication, role-based admin management, game reviews, image uploads, relational database integration, and dynamic game management functionality.
+
+## Demo Environment
+
+A live demo version of the project is deployed on Vercel.
+
+The demo database contains seeded sample data for portfolio and testing purposes.
+
+Please avoid using real personal information while testing the application.
+https://eshop-pi-ten.vercel.app
+
+## Screenshots
+
+### Homepage
+![Homepage](./components/screenshots/homepage.png)
+
+### Shop Page
+![Shop](./components/screenshots/shop.png)
+
+### Product Details & Reviews
+![Product Details](./components/screenshots/product-details.png)
+
+### Admin Panel
+![Admin](./components/screenshots/admin-panel.png)
+
+### Create/Edit Game
+![Create Game](./components/screenshots/create-game.png)
+
+### Login & Register
+![Login](./components/screenshots/login.png)
+![Register](./components/screenshots/register.png)
+
+## Features
+
+### User Features
+- User registration and login
+- Secure password hashing using bcrypt
+- Browse gaming marketplace
+- View trending and featured games
+- Game review and rating system
+- Edit personal reviews
+- Responsive user interface
+- Pagination for shop items
+
+### Admin Features
+- Role-based authorization system
+- Create, edit, and delete games
+- Manage trending games
+- User management panel
+- Delete user accounts
+- Edit user roles
+- Upload custom game images
+- Full CRUD operations
+
+### Backend Features
+- PostgreSQL relational database
+- Prisma ORM integration
+- REST API routes
+- Server-side form validation
+- Cookie-based authentication
+- Database seeding support
+- Dynamic data rendering
+
+
+## Technologies Used
+
+### Frontend
+- Next.js
+- React
+- JavaScript
+- Bootstrap 5
+- HTML/CSS
+
+### Backend / Database
+- Prisma ORM
+- PostgreSQL
+- Neon Database
+- Next.js Server Actions
+- REST API routes
+
+### Authentication & Security
+- bcryptjs
+- Cookie-based authentication
+- Role-based access control
+
+### Tools
+- Git / GitHub
+- Vercel
+- Faker.js
+
+
+## Project Structure
+
+```txt
+/src
+  /app
+    /admin
+    /api
+    /contact
+    /login
+    /product-details
+    /register
+    /shop
+  /components
+  /lib
+
+/prisma
+/public
+```
+
+
+## Database Schema
+
+Main entities:
+
+- User
+- Game
+- TrendingGame
+- Review
+
+Relationships:
+- Users can create reviews
+- Games can contain multiple reviews
+- Trending games are linked to games
+- Admin/User role system
+
+
+## Setup Instructions
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/SimonasAz/your-repository-name.git
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Create `.env`
+
+Copy `.env.example` to `.env`
+
+```bash
+cp .env.example .env
+```
+
+Add your PostgreSQL database URL:
+
+```env
+DATABASE_URL="your_database_url_here"
+```
+
+### 4. Run Prisma migrations
+
+```bash
+npx prisma migrate deploy
+```
+
+### 5. Generate Prisma client
+
+```bash
+npx prisma generate
+```
+
+### 6. (optional) Seed database 
+
+```bash
+npx prisma db seed
+```
+
+This creates:
+- Admin account
+- Demo users
+- Trending games
+- Sample game store data
+
+
+### 7. Start development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo Credentials
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Admin Account
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```txt
+Email: admin@example.com
+Password: admin123
+```
 
-## Learn More
+### Demo User
 
-To learn more about Next.js, take a look at the following resources:
+```txt
+Email: user1@example.com
+Password: user123
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Functionalities Implemented
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Authentication system
+- CRUD operations
+- Relational database management
+- Review system
+- Image upload handling
+- Form validation
+- Dynamic routing
+- Admin dashboard
+- Role-based permissions
+- Pagination
+- Server/client rendering
