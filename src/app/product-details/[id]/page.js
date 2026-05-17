@@ -4,7 +4,10 @@ import Link        from 'next/link'
 import ReviewSection from './ReviewSection'
 
 export default async function ProductDetails({ params }) {
-  const gameId = parseInt(params.id, 10)
+
+  const resolvedParams = await params
+
+  const gameId = parseInt(resolvedParams.id, 10)
   const game   = await prisma.game.findUnique({ where: { id: gameId } })
   if (!game) return <p>Game not found.</p>
 
@@ -15,7 +18,8 @@ export default async function ProductDetails({ params }) {
   })
 
   
-  const userCookie = cookies().get('user')
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
   const user = userCookie ? JSON.parse(userCookie.value) : null
   const isAdmin = user?.role === 'ADMIN'
 

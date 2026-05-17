@@ -16,23 +16,23 @@ https://eshop-pi-ten.vercel.app
 ## Screenshots
 
 ### Homepage
-![Homepage](./components/screenshots/homepage.png)
+[Homepage](./public\assets\images\homepage.png)
 
 ### Shop Page
-![Shop](./components/screenshots/shop.png)
+[Shop](./public\assets\images\shop.png)
 
 ### Product Details & Reviews
-![Product Details](./components/screenshots/product-details.png)
+[Product Details](./components/screenshots/product-details.png)
 
 ### Admin Panel
-![Admin](./components/screenshots/admin-panel.png)
+[Admin](./components/screenshots/admin-panel.png)
 
 ### Create/Edit Game
-![Create Game](./components/screenshots/create-game.png)
+[Create Game](./components/screenshots/create-game.png)
 
 ### Login & Register
-![Login](./components/screenshots/login.png)
-![Register](./components/screenshots/register.png)
+[Login](./components/screenshots/login.png)
+[Register](./components/screenshots/register.png)
 
 ## Features
 

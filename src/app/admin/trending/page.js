@@ -9,7 +9,7 @@ export default async function AdminGamesPage() {
 
   if (!userCookie) redirect('/login')
   const user = JSON.parse(userCookie.value)
-  if (user.role !== 'admin') redirect('/')
+  if (user.role !== 'ADMIN') redirect('/')
 
   const games = await prisma.game.findMany({ orderBy: { id: 'asc' } })
 
