@@ -4,8 +4,10 @@ import { revalidatePath } from 'next/cache'
 import Link from 'next/link'
 
 export default async function DeleteTrendingGame({ params }) {
+  const resolvedParams = await params
+
   const game = await prisma.trendingGame.findUnique({
-    where: { id: Number(params.id) }
+    where: { id: Number(resolvedParams.id) }
   })
   if (!game) redirect('/admin/trending')
 

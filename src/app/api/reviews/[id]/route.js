@@ -2,7 +2,10 @@ import { prisma } from '@/app/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function DELETE(request, { params }) {
-  const reviewId = parseInt(params.id, 10)
+  
+  const resolvedParams = await params
+  const reviewId = parseInt(resolvedParams.id, 10)
+  
   const cookieStore = await cookies()
   const userCookie = cookieStore.get('user')
   const user = userCookie && JSON.parse(userCookie.value)
@@ -29,7 +32,9 @@ export async function DELETE(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  const reviewId = parseInt(params.id, 10)
+  
+  const resolvedParams = await params
+  const reviewId = parseInt(resolvedParams.id, 10)
   const body = await request.json()
   const { text: rawText, rating: rawRating } = body
   const cookieStore = await cookies()

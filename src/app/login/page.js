@@ -20,7 +20,7 @@ export default function LoginPage() {
 
     if (res.ok) {
       const { role } = await res.json();
-      router.push(role === 'ADMIN' ? '/admin' : '/');
+      router.push(role === 'ADMIN' ? '/' : '/');
     } else {
       const data = await res.json();
       setError(data.message);

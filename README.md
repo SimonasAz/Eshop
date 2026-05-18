@@ -22,7 +22,7 @@ https://eshop-pi-ten.vercel.app
 [Shop](./public\assets\images\shop.png)
 
 ### Product Details & Reviews
-[Product Details](./components/screenshots/product-details.png)
+[Product Details](./public\assets\images\product-details.png)
 
 ### Admin Panel
 [Admin](./components/screenshots/admin-panel.png)

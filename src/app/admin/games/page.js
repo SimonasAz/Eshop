@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 export default async function AdminGamesPage() {
-  const cookieStore = cookies()
-  const userCookie = cookieStore.get('user')
+  const cookieStore = await cookies()
+const userCookie = cookieStore.get('user')
 
   if (!userCookie) redirect('/login')
   const user = JSON.parse(userCookie.value)

@@ -3,7 +3,13 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
 export default async function DeleteGame({ params }) {
-  const game = await prisma.game.findUnique({ where: { id: Number(params.id) } })
+
+  const resolvedParams = await params
+
+  const game = await prisma.game.findUnique({
+    where: { id: Number(resolvedParams.id) }
+  })
+  
   if (!game) redirect('/admin/games')
 
   async function handleDelete() {

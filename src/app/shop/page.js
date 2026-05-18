@@ -3,7 +3,12 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 export default async function ShopPage({ searchParams }) {
-  const page = Math.max(1, parseInt(searchParams.page, 10) || 1)
+
+  const resolvedSearchParams = await searchParams
+  const page = Math.max(
+    1,
+    parseInt(resolvedSearchParams.page, 10) || 1
+  )
   const pageSize = 40
 
   const total = await prisma.game.count()

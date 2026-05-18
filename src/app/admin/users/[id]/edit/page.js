@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function EditUserPage({ params }) {
-  const userId = params.id
+export default async function EditUserPage({ params }) {
+
+  const resolvedParams = await params
+  const userId = resolvedParams.id
+  
   const [email, setEmail] = useState('')
   const [role, setRole] = useState('USER')
   const router = useRouter()

@@ -2,7 +2,9 @@ import { prisma } from '@/app/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function GET(_, { params }) {
-  const id = parseInt(params.id, 10)
+  
+  const resolvedParams = await params
+  const id = parseInt(resolvedParams.id, 10)
   const user = await prisma.user.findUnique({ where: { id } })
 
   if (!user) {
@@ -13,7 +15,8 @@ export async function GET(_, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  const id = parseInt(params.id, 10)
+  const resolvedParams = await params
+  const id = parseInt(resolvedParams.id, 10)
   const { email, role } = await request.json()
 
   if (!email || !role) {
@@ -29,7 +32,8 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  const id = parseInt(params.id, 10)
+  const resolvedParams = await params
+  const id = parseInt(resolvedParams.id, 10)
 
   try {
     await prisma.user.delete({ where: { id } })

@@ -6,8 +6,11 @@ import fs from 'fs'
 import path from 'path'
 
 export default async function EditGame({ params }) {
+
+  const resolvedParams = await params
+
   const game = await prisma.game.findUnique({
-    where: { id: Number(params.id) }
+    where: { id: Number(resolvedParams.id) }
   })
   if (!game) {
     redirect('/admin/games')

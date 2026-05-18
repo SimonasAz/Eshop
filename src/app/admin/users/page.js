@@ -5,7 +5,10 @@ import { redirect } from 'next/navigation'
 import DeleteUserButton from '@/components/DeleteUserButton'
 
 export default async function AdminUserList() {
-  const userCookie = cookies().get('user')
+  
+  const cookieStore = await cookies()
+  const userCookie = cookieStore.get('user')
+
   const user = userCookie ? JSON.parse(userCookie.value) : null
   if (!user || user.role !== 'ADMIN') redirect('/')
 

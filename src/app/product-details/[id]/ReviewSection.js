@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function ReviewSection({
@@ -19,7 +18,6 @@ export default function ReviewSection({
   const [messageType, setMessageType] = useState('')
   const [editMode, setEditMode] = useState(false)
   const [editingReviewId, setEditingReviewId] = useState(null)
-  const router = useRouter()
 
   const handleDelete = async (reviewId) => {
     if (!confirm('Are you sure you want to delete this review?')) return

@@ -2,7 +2,9 @@ import { prisma } from '@/app/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function POST(request, { params }) {
-  const gameId     = parseInt(params.id, 10)
+  
+  const resolvedParams = await params
+  const gameId     = parseInt(resolvedParams.id, 10)
   const form       = await request.formData()
   const rawText    = form.get('text')
   const rawRating  = form.get('rating')
