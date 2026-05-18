@@ -1,12 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default async function EditUserPage({ params }) {
-
-  const resolvedParams = await params
-  const userId = resolvedParams.id
+export default  function EditUserPage({ params }) {
+  const userId = params.id
   
   const [email, setEmail] = useState('')
   const [role, setRole] = useState('USER')
@@ -19,9 +17,9 @@ export default async function EditUserPage({ params }) {
     setRole(data.role)
   }
 
-  useState(() => {
-    fetchUser()
-  }, [])
+  useEffect(() => {
+  fetchUser()
+}, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -13,7 +13,7 @@ export default async function EditGame({ params }) {
     where: { id: Number(resolvedParams.id) }
   })
   if (!game) {
-    redirect('/admin/games')
+    redirect('/shop')
   }
 
   async function handleEdit(formData) {
@@ -26,7 +26,7 @@ export default async function EditGame({ params }) {
     const price       = parseFloat(formData.get('price'))
     const discount    = parseFloat(formData.get('discount')) || 0
 
-    // ─── VALIDATIONS ──────────────────────────────────────────────────────
+
     if (!title || typeof title !== 'string' || title.trim().length < 3 || title.trim().length > 100) {
       throw new Error('Title must be a string between 3 and 100 characters.')
     }
@@ -43,7 +43,7 @@ export default async function EditGame({ params }) {
       throw new Error('Discount must be between 0 and 100.')
     }
 
-    // ─── IMAGE URL & FILE ─────────────────────────────────────────────────
+
     let imageUrl = game.imageUrl
 
     const inputImageUrl = formData.get('imageUrl')?.toString().trim()
@@ -82,7 +82,7 @@ export default async function EditGame({ params }) {
       imageUrl = `/uploads/${filename}`
     }
 
-    // ─── DATABASE UPDATE
+
     await prisma.game.update({
       where: { id: game.id },
       data: {

@@ -19,8 +19,15 @@ export default function LoginPage() {
     });
 
     if (res.ok) {
-      const { role } = await res.json();
-      router.push(role === 'ADMIN' ? '/' : '/');
+        const { role } = await res.json();
+
+        router.refresh();
+
+        router.push(
+          role === 'ADMIN'
+            ? '/'
+            : '/'
+        );
     } else {
       const data = await res.json();
       setError(data.message);

@@ -5,10 +5,8 @@ import RouteListener from './RouteListener';
 
 export default function ClientWrapper({ children }) {
   return (
-    <>
-      <Preloader />     
-      {children}        
-      <RouteListener /> 
+    <>    
+      {children}       
     </>
   );
 }

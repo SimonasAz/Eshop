@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-
+      
         <Script
           src="/vendor/jquery/jquery.min.js"
           strategy="beforeInteractive"

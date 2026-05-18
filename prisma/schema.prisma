@@ -17,7 +17,7 @@ model Review {
   user      User     @relation(fields: [userId], references: [id])
   
   gameId    Int
-  game      Game     @relation(fields: [gameId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -31,7 +31,7 @@ model User {
 model TrendingGame {
   id        Int      @id @default(autoincrement())
   gameId    Int
-  game      Game     @relation(fields: [gameId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
 
   title     String
   category  String

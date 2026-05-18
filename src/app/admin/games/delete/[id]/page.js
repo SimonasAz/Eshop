@@ -9,14 +9,14 @@ export default async function DeleteGame({ params }) {
   const game = await prisma.game.findUnique({
     where: { id: Number(resolvedParams.id) }
   })
-  
+
   if (!game) redirect('/admin/games')
 
   async function handleDelete() {
     'use server'
     await prisma.game.delete({ where: { id: game.id } })
-    revalidatePath('/admin/games')
-    redirect('/admin/games')
+    revalidatePath('/shop')
+    redirect('/shop')
   }
 
   return (
