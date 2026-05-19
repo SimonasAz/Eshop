@@ -84,7 +84,7 @@ export default async function Home() {
           <div className="caption header-text">
             <h6>Welcome to lugx</h6>
             <h2>BEST E-SHOP WEBSITE</h2>
-            <p>LUGX Gaming is a gaming website. You can find many of your games on this site</p>
+            <p>You can find many of your favorite games on this site.</p>
             <div className="search-input">
               <form id="search" action="#">
                 <input
@@ -319,37 +319,22 @@ export default async function Home() {
                 </span>
             </div>
 
-            <div  
-                className="down-content"  
-                style={{  
-                  position: 'relative',  
-                  padding: '15px 20px 30px',  
-                  textAlign: 'left'  
-                }}  
-              >  
-                <span className="category">{game.category}</span>  
-                <h4 style={{ margin: '8px 0', fontSize: '16px' }}>{game.title}</h4>
+            <div className="down-content">
+
+                  <div className="text">
+                    <span className="category">{game.category}</span>
+
+                    <h4>{game.title}</h4>
+                  </div>
+
                   <Link
-                  href={`/product-details/${game.id}`}
-                  style={{
-                    position: 'absolute',
-                    bottom: '25px',        
-                    left: '270px',         
-                    backgroundColor: '#ff556e',
-                    width: '44px',         
-                    height: '44px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'                    
-                  }}
-                >
-                  <i
-                    className="fa fa-shopping-bag"
-                    style={{ color: 'white', fontSize: '18px' }}
-                  ></i>
-                </Link>
-              </div>
+                    href={`/product-details/${game.id}`}
+                    className="game-icon"
+                  >
+                    <i className="fa fa-shopping-bag"></i>
+                  </Link>
+
+                </div>
           </div>
         </div>
       ))}
