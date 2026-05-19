@@ -319,22 +319,15 @@ export default async function Home() {
                 </span>
             </div>
 
-            <div className="down-content">
+           <div className="down-content">
+                <span className="category">{game.category}</span>
 
-                  <div className="text">
-                    <span className="category">{game.category}</span>
+                <h4>{game.title}</h4>
 
-                    <h4>{game.title}</h4>
-                  </div>
-
-                  <Link
-                    href={`/product-details/${game.id}`}
-                    className="game-icon"
-                  >
-                    <i className="fa fa-shopping-bag"></i>
-                  </Link>
-
-                </div>
+                <Link href={`/product-details/${game.id}`}>
+                  <i className="fa fa-shopping-bag"></i>
+                </Link>
+              </div>
           </div>
         </div>
       ))}
