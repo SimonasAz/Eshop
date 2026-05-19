@@ -48,6 +48,11 @@ export default function RootLayout({ children }) {
           strategy="beforeInteractive"
         />
         <Script
+          src="/assets/js/isotope.min.js"
+          strategy="afterInteractive"
+        />
+        
+        <Script
           src="/vendor/bootstrap/js/bootstrap.min.js"
           strategy="afterInteractive"
         />

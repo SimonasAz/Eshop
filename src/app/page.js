@@ -42,7 +42,30 @@ export default async function Home() {
                           <Link href="/admin/users">Manage Users</Link>
                         </li>
                       )}
-                      <li><a href="/login">Sign In</a></li>
+                      {user ? (
+                        <li>
+                          <form action="/api/logout" method="POST">
+                            <button
+                              type="submit"
+                              style={{
+                                border: 'none',
+                                background: '#ee626b',
+                                color: 'white',
+                                padding: '2px 20px',
+                                borderRadius: '25px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              Logout
+                            </button>
+                          </form>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link href="/login">Sign In</Link>
+                        </li>
+                      )}
                   </ul>   
                   <a href="#" className="menu-trigger">
                     <span>Menu</span>
