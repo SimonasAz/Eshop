@@ -50,3 +50,7 @@ body {
   max-width: 60px;    
   max-height: 60px;
 }
+
+.row.trending-box {
+  align-items: flex-start !important;
+}
