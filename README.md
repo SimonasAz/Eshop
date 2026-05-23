@@ -11,28 +11,28 @@ A live demo version of the project is deployed on Vercel.
 The demo database contains seeded sample data for portfolio and testing purposes.
 
 Please avoid using real personal information while testing the application.
-https://eshop-pi-ten.vercel.app
+https://eshop-pi-ten.vercel.app/
 
 ## Screenshots
 
 ### Homepage
-[Homepage](./public\assets\images\homepage.png)
+![Homepage](./public\assets\images\homepage.png)
 
 ### Shop Page
-[Shop](./public\assets\images\shop.png)
+![Shop](./public\assets\images\shop.png)
 
 ### Product Details & Reviews
-[Product Details](./public\assets\images\product-details.png)
+![Product Details](./public\assets\images\product-details.png)
 
 ### Admin Panel
-[Admin](./components/screenshots/admin-panel.png)
+![Admin](./public\assets\images\admin.png)
 
 ### Create/Edit Game
-[Create Game](./components/screenshots/create-game.png)
+![Create Game](./public\assets\images\create-game.png)
 
 ### Login & Register
-[Login](./components/screenshots/login.png)
-[Register](./components/screenshots/register.png)
+![Login](./public\assets\images\login.png)
+![Register](./public\assets\images\register.png)
 
 ## Features
 
