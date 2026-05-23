@@ -13,26 +13,30 @@ The demo database contains seeded sample data for portfolio and testing purposes
 Please avoid using real personal information while testing the application.
 https://eshop-pi-ten.vercel.app/
 
+## GitHub Repository
+
+https://github.com/SimonasAz/eshop
+
 ## Screenshots
 
 ### Homepage
-![Homepage](./public\assets\images\homepage.png)
+![Homepage](./public/assets/images/homepage.png)
 
 ### Shop Page
-![Shop](./public\assets\images\shop.png)
+![Shop](./public/assets/images/shop.png)
 
 ### Product Details & Reviews
-![Product Details](./public\assets\images\product-details.png)
+![Product Details](./public/assets/images/product-details.png)
 
 ### Admin Panel
-![Admin](./public\assets\images\admin.png)
+![Admin](./public/assets/images/admin.png)
 
 ### Create/Edit Game
-![Create Game](./public\assets\images\create-game.png)
+![Create Game](./public/assets/images/create-game.png)
 
 ### Login & Register
-![Login](./public\assets\images\login.png)
-![Register](./public\assets\images\register.png)
+![Login](./public/assets/images/login.png)
+![Register](./public/assets/images/register.png)
 
 ## Features
 
@@ -92,6 +96,12 @@ https://eshop-pi-ten.vercel.app/
 - Vercel
 - Faker.js
 
+## UI / Design Credits
+
+The initial frontend UI design was based on the TemplateMo Lugx Gaming template.
+
+The application functionality, backend architecture, database integration, authentication system, admin dashboard, API routes, Prisma ORM integration, and dynamic features were fully implemented and extended as part of this project.
+
 
 ## Project Structure
 
@@ -134,7 +144,7 @@ Relationships:
 ### 1. Clone repository
 
 ```bash
-git clone https://github.com/SimonasAz/your-repository-name.git
+git clone https://github.com/SimonasAz/eshop.git
 ```
 
 ### 2. Install dependencies
