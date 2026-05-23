@@ -1,8 +1,12 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
+import { cookies } from 'next/headers'
 
-export default function Contact() {
+export default async function Contact() {
+const cookieStore = await cookies()
+const userCookie = cookieStore.get('user')
+const user = userCookie ? JSON.parse(userCookie.value) : null
+const isAdmin = user?.role === 'ADMIN'
   return (
     <>
 
@@ -18,7 +22,36 @@ export default function Contact() {
                   <li><Link href="/">Home</Link></li>
                   <li><Link href="/shop">Our Shop</Link></li>                  
                   <li><Link href="/contact" className="active">Contact Us</Link></li>
-                  <li><Link href="/login">Sign In</Link></li>
+                  {isAdmin && (
+                      <li>
+                        <Link href="/admin/users">Manage Users</Link>
+                      </li>
+                    )}
+
+                    {user ? (
+                      <li>
+                        <form action="/api/logout" method="POST">
+                          <button
+                            type="submit"
+                            style={{
+                              border: 'none',
+                              background: '#ee626b',
+                              color: 'white',
+                              padding: '2px 20px',
+                              borderRadius: '25px',
+                              fontWeight: '600',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </form>
+                      </li>
+                    ) : (
+                      <li>
+                        <Link href="/login">Sign In</Link>
+                      </li>
+                      )}
                 </ul>
                 <a className="menu-trigger">
                   <span>Menu</span>
